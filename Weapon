@@ -1,0 +1,36 @@
+class Weapon
+{
+    private int _damage;
+
+    public void Fire(Player player)
+    {
+        player.ApplyDamage(_damage);        
+    }
+}
+
+class Player
+{
+    private int _health;
+
+    public int Health => _health;
+
+    public void ApplyDamage(int damage)
+    {
+        _health -= damage;        
+    }
+}
+
+class Bot
+{
+    private Weapon _weapon = new Weapon();
+    private int _numberBullets;
+
+    private void OnSeePlayer(Player player)
+    {
+        if (_numberBullets > 0 & player.Health > 0)
+        {
+            _weapon.Fire(player);
+            _numberBullets -= 1;
+        }
+    }
+}
